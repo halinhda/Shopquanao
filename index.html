@@ -4,107 +4,123 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini E-commerce</title>
-    <!-- Liên kết file CSS -->
     <link rel="stylesheet" href="stylee_commerce.css">
-    <!-- Liên kết file JavaScript -->
+    <link rel="stylesheet" href="cart_popup.css">
+    <link rel="stylesheet" href="account_popup.css">
     <script src="script_e_commerce.js" defer></script>
 </head>
-
 <body>
 
-    <!-- ===================== HEADER ===================== -->
     <header>
         <h1>SHOP WIND'S</h1>
         
-
-        <!-- ======= ĐỒNG HỒ THỜI GIAN ======= -->
         <div class="clock-container">
-            <div class="time-block hour-block">
+            <div class="time-block">
                 <span id="hour">12</span>
                 <span class="label">HOUR</span>
             </div>
-
-            <div class="time-block minute-block">
+            <div class="time-block">
                 <span id="minute">00</span>
                 <span class="label">MINUTE</span>
             </div>
-
-            <div class="time-block second-block">
+            <div class="time-block">
                 <span id="second">00</span>
                 <span class="label">SECOND</span>
             </div>
-
             <div class="ampm-block">
                 <span id="ampm">PM</span>
             </div>
         </div>
 
-         <!-- ======= THANH MENU ======= -->
         <nav class="menu-container">
-            <div class="Home">
-                 <a href="mini_ecommerce.html" class="nav-link">Trang chủ</a>
-            </div>
-            <div class="products">
-                <a href="#products" class="nav-link">Sản phẩm</a>
-            </div>
-            <div class="cart">
-                <a href="#cart" class="nav-link">Giỏ hàng</a>
-            </div>
-            <div>
-                <a href="#accout" class="nav-link">Tài khoản</a>
-            </div>
-            <div class="contact">
-                <a href="#contact" class="nav-link">Liên hệ</a>
-            </div>
+            <a href="#home" class="nav-link">Trang chủ</a>
+            <a href="#products-container" class="nav-link">Sản phẩm</a>
+            <a href="#" class="nav-link" id="cart-link">Giỏ hàng</a>
+            <a href="#" class="nav-link" id="account-link">Tài khoản</a>
+            <a href="#contact" class="nav-link">Liên hệ</a>
         </nav>
-
-       
-
     </header>
 
-    <!-- ===================== MAIN CONTENT ===================== -->
     <main>
-
-        <!-- ======= DANH SÁCH SẢN PHẨM ======= -->
+        
         <section class="products-container" id="products-container">
             <h2>Sản phẩm</h2>
 
-            <!-- Sản phẩm 1 -->
-            <div class="product" data-id="1" data-name="Áo thun" data-price="150000">
-                <img src="image\aothun.webp" alt="Áo thun">
+            <div class="product" data-id="1" data-name="Áo thun nam" data-price="150000">
+                <img src="image/aothun.webp" alt="Áo thun">
                 <h3>Áo thun</h3>
                 <p>Giá: 150.000 VNĐ</p>
                 <button class="add-to-cart">Thêm vào giỏ hàng</button>
             </div>
 
-            <!-- Sản phẩm 2 -->
             <div class="product" data-id="2" data-name="Quần jeans" data-price="250000">
-                <img src="image/quanjeans.webp" alt="Quần jeans">
+                <img src="image/quanjeans.webp" alt="Quần jeans màu xanh đậm">
                 <h3>Quần jeans</h3>
                 <p>Giá: 250.000 VNĐ</p>
                 <button class="add-to-cart">Thêm vào giỏ hàng</button>
             </div>
 
-            <!-- Sản phẩm 3 -->
             <div class="product" data-id="3" data-name="Giày thể thao" data-price="350000">
-                <img src="image/giaythethao.webp" alt="Giày thể thao">
+                <img src="image/giaythethao.webp" alt="Giày thể thao màu trắng">
                 <h3>Giày thể thao</h3>
                 <p>Giá: 350.000 VNĐ</p>
                 <button class="add-to-cart">Thêm vào giỏ hàng</button>
             </div>
         </section>
+        
+        
+        
+    </main>
 
-        <!-- ======= GIỎ HÀNG ======= -->
-        <section class="cart-container" id="cart-container">
+    <div id="cart-popup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closeCartPopup()">X</span>
             <h2>Giỏ hàng</h2>
             <ul id="cart-items"></ul>
             <p>Tổng tiền: <span id="cart-total">0</span> VNĐ</p>
             <button id="checkout-btn">Thanh toán</button>
-        </section>
+        </div>
+    </div>
 
-    </main>
+    <div id="account-popup" class="popup hidden">
+        <div class="popup-content">
+            <span class="close-btn" onclick="toggleAccountPopup()">X</span>
+            <h2>Tài khoản</h2>
+            
+            <form id="signup-form">
+                <h3>Đăng ký</h3>
+                <input type="text" id="signup-username" placeholder="Tên người dùng" required>
+                <input type="email" id="signup-email" placeholder="Email" required>
+                <input type="password" id="signup-password" placeholder="Mật khẩu" required>
+                <button type="submit" id="signup-btn">Đăng ký</button>
+            </form>
+            
+            <form id="login-form">
+                <h3>Đăng nhập</h3>
+                <input type="email" id="login-email" placeholder="Email" required>
+                <input type="password" id="login-password" placeholder="Mật khẩu" required>
+                <button type="submit" id="login-btn">Đăng nhập</button>
+            </form>
+            
+            <p id="welcome-message"></p>
+        </div>
+    </div>
 
-    <!-- ===================== FOOTER ===================== -->
+    <!--HÓA ĐƠN-->
+    <div id="invoice-popup" class="popup hidden">
+        <div class="popup-content">
+            <span class="close-btn" onclick="toggleInvoicePopup()">X</span>
+            <div id="invoice-content">
+                </div>
+            <button onclick="window.print()">In hóa đơn</button>
+        </div>
+    </div>
+
+    <section id="contact">
+            <h2>Liên hệ</h2>
+            <p>Thông tin liên hệ của cửa hàng...</p>
+    </section>
+
     <footer>
         <p>&copy; 2025 Cửa Hàng Của Gió. All rights reserved.</p>
     </footer>

@@ -1,16 +1,16 @@
-/* ===== BODY ===== */
+/* ===================== BODY ===================== */
 
 body {
     font-family: 'Times New Roman', Times, serif;
-    margin: 0; /* Loại bỏ lề mặc định */
-    background-color: #a7b5c1; /* Màu nền nhẹ nhàng */
+    margin: 0;
+    background-color: #a7b5c1;
     color: #000000;
-    display: flex; /* Căn chỉnh theo Flexbox */
+    display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-/* ===== HEADER ===== */
+/* ===================== HEADER ===================== */
 
 header {
     font-family: 'Times New Roman', Times, serif;
@@ -23,15 +23,13 @@ header {
     border-radius: 10px;
 }
 
-
-
-/* ===== ĐỒNG HỒ (Clock) ===== */
+/* ===================== ĐỒNG HỒ (Clock) ===================== */
 
 .clock-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px; 
+    gap: 10px;
     padding: 1px;
 }
 
@@ -45,13 +43,13 @@ header {
     font-size: 15px;
     font-weight: bold;
     text-align: center;
+    background-color: #418e8a87;
+    border-radius: 5px;
+    border-size: 1px;
+    
 }
-
-.hour-block,
-.minute-block,
-.second-block,
 .ampm-block {
-    background-color: #5eb2fb86;
+    background-color: #418e8a87;
     border-radius: 5px;
 }
 
@@ -68,7 +66,39 @@ header {
     margin-top: 5px;
 }
 
-/* ===== MAIN CONTENT ===== */
+/* ===================== THANH ĐIỀU HƯỚNG (NAV BAR) ===================== */
+
+.menu-container {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    border-radius: 10px;
+}
+
+nav a {
+    margin: 15px 15px;
+    color: #ffffff;
+    color-scheme: light dark;
+    text-decoration: none; /* Bỏ gạch chân link */
+}
+
+.nav-link {
+    transition: background-color 0.3s, color 0.3s;
+    font-size: medium;
+}
+
+.nav-link:hover {
+    background-color: #20597d;
+    color: #ffffff;
+}
+
+/* Thêm class active cho mục khi đang được chọn */
+.nav-link.active {
+    background-color: #517091;
+    color: #ffffff;
+}
+
+/* ===================== MAIN CONTENT ===================== */
 
 main {
     display: flex;
@@ -79,24 +109,13 @@ main {
     flex-grow: 1;
 }
 
-/* ===== PRODUCT & CART ===== */
-
-.products-container,
-.cart-container {
+.products-container {
     background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.products-container {
     flex: 2;
     min-width: 300px;
-}
-
-.cart-container {
-    flex: 1;
-    min-width: 250px;
 }
 
 .product {
@@ -127,9 +146,50 @@ main {
     background-color: #009dff;
 }
 
-/* ===== CART ITEMS ===== */
-#cart-items li {
+/* ===================== POPUP GIỎ HÀNG ===================== */
+
+#cart-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.6);
+    display: none; /* Ban đầu ẩn đi */
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    z-index: 9999;
+}
+
+#cart-popup.show {
+    opacity: 1;
+    pointer-events: auto;
+    display: flex; /* Dùng flexbox để căn giữa */
+}
+
+#cart-popup .popup-content {
+    background: #ecfcf8;
+    padding: 30px;
+    border-radius: 15px;
+    border-style: ridge;
+    animation: slideUp 0.5s ease;
+}
+
+#cart-popup .close-btn {
+    float: right;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#cart-popup ul {
     list-style: none;
+    padding: 0;
+}
+
+#cart-popup #cart-items li {
     margin-bottom: 10px;
     border-bottom: 1px dashed #ccc;
     padding-bottom: 5px;
@@ -137,7 +197,7 @@ main {
     justify-content: space-between;
 }
 
-#checkout-btn {
+#cart-popup #checkout-btn {
     background-color: #517091;
     color: white;
     border: none;
@@ -149,50 +209,151 @@ main {
     margin-top: 15px;
 }
 
-#checkout-btn:hover {
+#cart-popup #checkout-btn:hover {
     background-color: #009dff;
 }
 
-/* ===== ACCOUNT DASHBOARD ===== */
-.account-dashboard {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px
-}
+/* ===================== POPUP TÀI KHOẢN (Đăng nhập & Đăng ký) ===================== */
 
-/* =====NAV BAR ===== */
-.menu-container {
-    display: flex;
+#account-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.6);
+    display: none;
     justify-content: center;
-    padding: 10px 0;
-    border-radius: 10px;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    z-index: 9999;
 }
 
-nav a {
-    margin: 15px 15px;
-    color: #ffffff;
-    color-scheme: light dark;
+#account-popup.show {
+    opacity: 1;
+    pointer-events: auto;
+    display: flex;
 }
 
-.nav-link {
-    transition: background-color 0.3s, color 0.3s;
-    font-size: medium;
+#account-popup .popup-content {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    border-style: ridge;
+    animation: slideUp 0.5s ease;
+    max-width: 400px;
+    width: 90%;
 }
 
-.nav-link:hover {
-    background-color: #20597d;
-    color: #ffffff;
+#account-popup .close-btn {
+    float: right;
+    cursor: pointer;
+    font-weight: bold;
 }
-/* Thêm class avtive cho mục khi đang được chọn */
-.nav-link.active {
+
+#account-popup form {
+    margin-bottom: 20px;
+}
+
+#account-popup h3 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#account-popup input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#account-popup button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#account-popup p {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* Các keyframe để tạo hiệu ứng */
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ===================== POPUP HÓA ĐƠN ===================== */
+#invoice-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    z-index: 9999;
+}
+
+#invoice-popup.show {
+    opacity: 1;
+    pointer-events: auto;
+    display: flex;
+}
+
+#invoice-popup .popup-content {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    border-style: ridge;
+    animation: slideUp 0.5s ease;
+    max-width: 600px;
+    width: 90%;
+}
+
+#invoice-popup h3, h4 {
+    text-align: center;
+    color: #333;
+}
+
+#invoice-content hr {
+    border-top: 1px dashed #ccc;
+}
+
+#invoice-popup button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
     background-color: #517091;
-    color: #ffffff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-/* ===== FOOTER ===== */
+/* ===================== FOOTER ===================== */
 footer {
     font-family: 'Times New Roman', Times, serif;
     font-size: 14px;
@@ -201,5 +362,5 @@ footer {
     text-align: center;
     padding: 10px 20px;
     border-radius: 10px;
-    margin-top: auto; /* Đẩy footer xuống dưới cùng */
+    margin-top: auto;
 }
